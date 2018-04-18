@@ -8,12 +8,11 @@ require "logstash/namespace"
 # It is only intended to be used as an .
 class LogStash::Filters::PrivateGeoIp < LogStash::Filters::Base
 
-  config_name "private-geo-ip"
+  config_name "private_geo_ip"
   
   # Replace the message with this value.
-  config :message, :validate => :string, :default => "Hello World!"
-  config :ip, :validate=> :string, :default=> "0.0.0.0"
-
+  config :source, :validate => :string, :default => "127.0.0.1"
+  
   public
   def register
     # Add instance variables 
@@ -21,15 +20,12 @@ class LogStash::Filters::PrivateGeoIp < LogStash::Filters::Base
 
   public
   def filter(event)
-    puts("Message is now: #{event.get("message")}")
-    if @message
-      # Replace the event message with our message as configured in the
-      # config file.
-      
-      puts event.get("source")
-      event.set("geoIp", @message)
-    end
 
+    puts("default:"+@source)
+    puts event
+    ip = 10
+    event.set("geoip", @ip)
+    
     # filter_matched should go in the last line of our successful code
     filter_matched(event)
   end # def filter
