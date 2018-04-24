@@ -40,7 +40,15 @@ bundle install
 - Run tests
 
 ```sh
-bundle exec rspec
+bundle exec rspec spec
+```
+Generate Plugin 
+```sh
+gem build logstash-filter-private-geo-ip.gemspec
+```
+Install plugin
+```sh
+/bin/logstash-plugin install logstash-filter-private-geo-ip-0.1.0.gem
 ```
 
 ### 2. Running your unpublished Plugin in Logstash

@@ -1,3 +1,3 @@
-startip,endip,country,region,city,postalCode,latitude,longitude,building
-10.10.0.0,10.10.250.250,US,CA,San Francisco,94124,37.7353,-122.3732,Santa Clara
+startip,endip,country,region,city,postalCode,latitude,longitude,site
+10.10.0.0,10.40.250.250,US,CA,San Francisco,94124,37.7353,-122.3732,Santa Clara
 11.10.0.0,11.10.250.250,US,CA,San Francisco,94124,37.7353,-122.3732,Sunnyvale

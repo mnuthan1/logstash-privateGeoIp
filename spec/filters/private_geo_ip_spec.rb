@@ -46,7 +46,7 @@ describe "LogStash::Filters::PrivateGeoIp" do
         }
         private_geo_ip {
           source => "10.10.29.25"
-          db_path => "C:/GFApps/elastic/logstash-filter-private-geo-ip/private_loc_details.csv"
+          db_path => "private_loc_details.csv"
         }
       }
       CONFIG
