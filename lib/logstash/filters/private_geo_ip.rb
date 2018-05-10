@@ -34,14 +34,16 @@ class LogStash::Filters::PrivateGeoIp < LogStash::Filters::Base
     end
     @geoipfilter = []
     @logger.info("Using private network path", :path => @db_path)
+    @logger.info("Using private network path", :path => @source)
   end # def register
 
   public
   def filter(event)
 
     filtered_row = nil
-    inputIp = @source.split('.').map(&:to_i)
-    @logger.info("source IP",:string => @source)
+    source = event.get(@source)
+    @logger.info("source IP",:string => source)
+    inputIp = source.split('.').map(&:to_i)
     #puts ipArray
     inputIpInt = inputIp[0].to_i   * 16777216 + inputIp[1].to_i   * 65536  + inputIp[2].to_i   * 256 + inputIp[3].to_i  
     @logger.info("source IP Int",:int => inputIpInt)
@@ -51,10 +53,11 @@ class LogStash::Filters::PrivateGeoIp < LogStash::Filters::Base
       ipArray = row['startip'].split('.').map(&:to_i) 
       startIpInt = ipArray[0].to_i   * 16777216 + ipArray[1].to_i   * 65536  + ipArray[2].to_i   * 256 + ipArray[3].to_i  
       if inputIpInt <= endIpInt and inputIpInt >= startIpInt
+        @logger.info("match",filtered_row)
         filtered_row = row
       end
     end
-    @logger.info("filtered_row",filtered_row)
+   
     if filtered_row.nil?
       String s = "[" + target + "][";
       @fields.each do |f|

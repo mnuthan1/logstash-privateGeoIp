@@ -45,7 +45,7 @@ describe "LogStash::Filters::PrivateGeoIp" do
           match => { "message" => "%{IP:source}: %{DATA}: %{DATA:header_field1}: %{GREEDYDATA:header_field2}" }
         }
         private_geo_ip {
-          source => "10.10.29.25"
+          source => ["source"]
           db_path => "private_loc_details.csv"
         }
       }
